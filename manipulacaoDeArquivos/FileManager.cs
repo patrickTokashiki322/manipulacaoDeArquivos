@@ -8,12 +8,15 @@ namespace manipulacaoDeArquivos
 {
     public class FileManager
     {
-        public void Operation(string path)
+        MainMenu mainMenu = new MainMenu();
+
+        public void Operate(string path)
         {
+            Console.WriteLine("");
+
             if (path == "1")
             {
                 Console.WriteLine("Você quer 'Informar um diretório.'");
-                Console.WriteLine("");
                 Console.WriteLine("Informe um caminho absoluto:");
 
                 SetDirectory(Console.ReadLine());
@@ -21,7 +24,6 @@ namespace manipulacaoDeArquivos
             else if (path == "2")
             {
                 Console.WriteLine("Você quer 'Criar um diretório.'");
-                Console.WriteLine("");
                 Console.WriteLine("Informe o nome do diretório:");
 
                 CreateDirectory(Console.ReadLine());
@@ -29,60 +31,108 @@ namespace manipulacaoDeArquivos
             else if (path == "3")
             {
                 Console.WriteLine("Você quer 'Copiar um arquivo.'");
+                Console.WriteLine("Informe o caminho absoluto do arquivo de origem:");
+
+                CopyFile();
             }
             else if (path == "4")
             {
                 Console.WriteLine("Você quer 'Excluir um diretório.'");
+                Console.WriteLine("Informe o caminho absoluto do diretório a ser excluído:");
+
+                DeleteDirectory(Console.ReadLine());
             }
             else if (path == "5")
             {
                 Console.WriteLine("Você quer 'Excluir um arquivo.'");
+                Console.WriteLine("Informe o caminho absoluto do arquivo com a extensão:");
+
+                DeleteFile(Console.ReadLine());
+            }
+            else if (path == "0")
+            {
+                mainMenu.ExitApplication();
             }
             else
             {
                 Console.WriteLine("Informe uma opção válida!");
 
-                Operation(Console.ReadLine());
+                Operate(Console.ReadLine());
             }
         }
 
         public void SetDirectory(string path)
         {
-            MainMenu mainMenu = new MainMenu();
-
             Directory.SetCurrentDirectory(path);
 
             string currentDirectory = Directory.GetCurrentDirectory();
 
+            Console.WriteLine("");
             Console.WriteLine($"Estamos no diretório: ${currentDirectory}");
-            Console.WriteLine("");
-            Console.WriteLine("Digite 0 para voltar.");
-            Console.WriteLine("");
 
-            string operation = Console.ReadLine();
-
-            if (operation == "0")
-            {
-                mainMenu.Back();
-            }
-            else
-            {
-                Console.WriteLine("Desculpe, digito inválido!");
-                Console.WriteLine("");
-                Console.WriteLine("Informe novamente o caminho desejado:");
-                Console.WriteLine("");
-
-                SetDirectory(Console.ReadLine());
-            }
-
+            mainMenu.setNewDirectory();
         }
 
         public void CreateDirectory(string path)
+        {            
+            bool existDirectory = Directory.Exists(path);
+
+            if (existDirectory)
+            {
+                Console.WriteLine("");
+                Console.WriteLine("O diretório já existe no caminho especificado.");
+
+                mainMenu.ExistDirectory();
+            }
+            else
+            {
+                Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), path));
+
+                Console.WriteLine("");
+                Console.WriteLine("O diretório foi criado com sucesso!");
+            }
+
+            mainMenu.createNewDirectory();
+        }
+
+        public void CopyFile()
         {
-            ///Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "stores","201","newDir"));
+            string file1 = Console.ReadLine();
 
-            Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), path));
+            Console.WriteLine("Informe o nome do arquivo copiado com a extensão:");
 
+            string fileName = Console.ReadLine();
+
+            CopyFileToDirectory(file1, fileName);
+
+            bool existFile = File.Exists(fileName);
+
+            if (existFile)
+            {
+                Console.WriteLine("");
+                Console.WriteLine("O arquivo foi copiado com sucesso!");
+            }
+
+            mainMenu.copyNewFile();
+        }
+
+        private void CopyFileToDirectory(string originFilePath, string fileName)
+        {
+            File.Copy(originFilePath, fileName);
+        }
+
+        public void DeleteDirectory(string path)
+        {
+            Directory.Delete(path);
+
+            mainMenu.deleteOtherDitectory();
+        }
+
+        public void DeleteFile(string path)
+        {
+            File.Delete(path);
+
+            mainMenu.deleteOtherFile();
         }
     }
 }
