@@ -23,6 +23,8 @@ Digite a opção desejada:
 4 - Excluir diretório
 5 - Excluir arquivo
 6 - Ler aquivo JSON
+7 - Escrever um arquivo texto (.txt)
+8 - Listar arquivos e pastas de um diretório
 0 - Sair");
 
             fileManager.Operate(Console.ReadLine());
@@ -276,6 +278,89 @@ Digite a opção desejada:
                 Console.WriteLine("Por favor, informe uma opção válida!");
 
                 readOtherJsonFile();
+            }
+        }
+
+        public void writeOtherTextInSameFile()
+        {
+            FileManager fileManager = new FileManager();
+
+            Console.WriteLine("Gostaria de escrever mais nesse arquivo");
+            Console.WriteLine("1 - Sim");
+            Console.WriteLine("2 - Não");
+
+            string operation = Console.ReadLine();
+
+            if (operation == "1")
+            {
+                Console.WriteLine("");
+                Console.WriteLine("Informe o caminho absoluto do arquivo com extensão:");
+                string path = Console.ReadLine();
+
+                fileManager.AppendNewText(path);
+            }
+            else if (operation == "2")
+            {
+                Console.WriteLine("");
+
+                Console.WriteLine("Gostaria de escrever um novo arquivo texto?");
+                Console.WriteLine("1 - Sim");
+                Console.WriteLine("2 - Não");
+
+                string operationFileText = Console.ReadLine();
+
+                if (operationFileText == "1")
+                {
+                    fileManager.WriteNewTxtFile();
+                }
+                else if(operationFileText == "2")
+                {
+                    Back();
+                }
+                else
+                {
+                    Console.WriteLine("");
+                    Console.WriteLine("Por favor, informe uma opção válida!");
+
+                    writeOtherTextInSameFile();
+                }
+            }
+            else
+            {
+                Console.WriteLine("");
+                Console.WriteLine("Por favor, informe uma opção válida!");
+
+                writeOtherTextInSameFile();
+            }
+        }
+
+        public void listOtherDirectoryFiles()
+        {
+            FileManager fileManager = new FileManager();
+
+            Console.WriteLine("Gostaria de listar arquivos de um outro diretório?");
+            Console.WriteLine("1 - Sim");
+            Console.WriteLine("2 - Não");
+
+            string operation = Console.ReadLine();
+
+            if (operation == "1")
+            {
+                Console.WriteLine("");
+                Console.WriteLine("Informe o caminho absoluto do diretório:");
+                fileManager.ListFilesAndDirectoriesInDirectory();
+            }
+            else if (operation == "2")
+            {
+                Console.WriteLine("");
+                Back();
+            }
+            else
+            {
+                Console.WriteLine("");
+                Console.WriteLine("Por favor, informe uma opção válida!");
+
+                listOtherDirectoryFiles();
             }
         }
     }

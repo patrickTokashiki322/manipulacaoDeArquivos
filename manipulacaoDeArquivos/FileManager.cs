@@ -57,6 +57,19 @@ namespace manipulacaoDeArquivos
 
                 ReadJsonFile();
             }
+            else if (path == "7")
+            {
+                Console.WriteLine("Você quer 'Criar um arquivo texto.'");
+
+                WriteNewTxtFile();
+            }
+            else if (path == "8")
+            {
+                Console.WriteLine("Você quer 'Listar arquivos de um diretório'");
+                Console.WriteLine("Informe o caminho absoluto do arquivo:");
+
+                ListFilesAndDirectoriesInDirectory();
+            }
             else if (path == "0")
             {
                 mainMenu.ExitApplication();
@@ -169,6 +182,56 @@ namespace manipulacaoDeArquivos
             Console.WriteLine("");
 
             mainMenu.readOtherJsonFile();
+        }
+
+        public void WriteNewTxtFile()
+        {
+            Console.WriteLine("Informe o caminho do arquivo texto com nome e extensão:");
+            string newTxtPath = Console.ReadLine();
+
+            Console.WriteLine("Por favor, escreva o conteúdo desejado:");
+            string textContent = Console.ReadLine();
+
+            File.WriteAllText(newTxtPath, textContent);
+            Console.WriteLine("");
+            
+            Console.WriteLine("Você escreveu o seguinte texto:");
+            Console.WriteLine(File.ReadAllText(newTxtPath));
+
+            mainMenu.writeOtherTextInSameFile();
+        }
+
+        public void AppendNewText(string path)
+        {
+            Console.WriteLine("Por favor, escreva o conteúdo desejado:");
+            string textContent = Console.ReadLine();
+
+            File.AppendAllText(path, textContent);
+
+            mainMenu.writeOtherTextInSameFile();
+        }
+
+        public void ListFilesAndDirectoriesInDirectory()
+        {
+            string filesPath = Console.ReadLine();
+
+            Console.WriteLine("");
+            Console.WriteLine($"Os arquivos do diretório {filesPath} são:");
+
+            IEnumerable<string> files = Directory.EnumerateFiles(filesPath);
+            foreach (string file in files)
+            {
+                Console.WriteLine($"{file} - <ARQUIVO>");
+            }
+
+            IEnumerable<string> directories = Directory.EnumerateDirectories(filesPath);
+            foreach (string directory in directories)
+            {
+                Console.WriteLine($"{directory} - <DIRETÓRIO>");
+            }
+
+            Console.WriteLine("");
+            mainMenu.listOtherDirectoryFiles();
         }
     }
 }
