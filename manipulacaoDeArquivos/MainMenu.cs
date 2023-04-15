@@ -12,7 +12,9 @@ namespace manipulacaoDeArquivos
         {
             FileManager fileManager = new FileManager();
 
-            Console.WriteLine($@"*** Menu principal ***
+            Console.WriteLine($@"----------------------------------
+          Menu principal          
+----------------------------------
 
 Digite a opção desejada:
 1 - Informar um diretório
@@ -20,6 +22,7 @@ Digite a opção desejada:
 3 - Copiar arquivo
 4 - Excluir diretório
 5 - Excluir arquivo
+6 - Ler aquivo JSON
 0 - Sair");
 
             fileManager.Operate(Console.ReadLine());
@@ -200,7 +203,7 @@ Digite a opção desejada:
             {
                 Console.WriteLine("");
                 Console.WriteLine("Por favor, informe o caminho absoluto do diretório a ser deletado:");
-                fileManager.DeleteDirectory(Console.ReadLine());
+                fileManager.DeleteDirectory();
             }
             else if (operation == "2")
             {
@@ -243,6 +246,36 @@ Digite a opção desejada:
                 Console.WriteLine("Por favor, informe uma opção válida!");
 
                 deleteOtherFile();
+            }
+        }
+
+        public void readOtherJsonFile()
+        {
+            FileManager fileManager = new FileManager();
+
+            Console.WriteLine("Gostaria de ler um outro arquivo JSON?");
+            Console.WriteLine("1 - Sim");
+            Console.WriteLine("2 - Não");
+
+            string operation = Console.ReadLine();
+
+            if (operation == "1")
+            {
+                Console.WriteLine("");
+                Console.WriteLine("Informe o caminho absoluto do arquivo:");
+                fileManager.ReadJsonFile();
+            }
+            else if (operation == "2")
+            {
+                Console.WriteLine("");
+                Back();
+            }
+            else
+            {
+                Console.WriteLine("");
+                Console.WriteLine("Por favor, informe uma opção válida!");
+
+                readOtherJsonFile();
             }
         }
     }

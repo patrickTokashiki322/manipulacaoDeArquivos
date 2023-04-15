@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -40,7 +41,7 @@ namespace manipulacaoDeArquivos
                 Console.WriteLine("Você quer 'Excluir um diretório.'");
                 Console.WriteLine("Informe o caminho absoluto do diretório a ser excluído:");
 
-                DeleteDirectory(Console.ReadLine());
+                DeleteDirectory();
             }
             else if (path == "5")
             {
@@ -48,6 +49,13 @@ namespace manipulacaoDeArquivos
                 Console.WriteLine("Informe o caminho absoluto do arquivo com a extensão:");
 
                 DeleteFile(Console.ReadLine());
+            }
+            else if (path == "6")
+            {
+                Console.WriteLine("Você quer 'Ler um arquivo JSON.'");
+                Console.WriteLine("Informe o caminho absoluto do arquivo:");
+
+                ReadJsonFile();
             }
             else if (path == "0")
             {
@@ -121,9 +129,25 @@ namespace manipulacaoDeArquivos
             File.Copy(originFilePath, fileName);
         }
 
-        public void DeleteDirectory(string path)
+        public void DeleteDirectory()
         {
-            Directory.Delete(path);
+
+            string path = Console.ReadLine();
+
+            Console.WriteLine("Gostaria de deletar todos os arquivos presentes no diretório?");
+            Console.WriteLine("1 - Sim");
+            Console.WriteLine("2 - Não");
+
+            string deleteAllFilesInDirectory = Console.ReadLine();
+
+            if (deleteAllFilesInDirectory == "1")
+            {
+                Directory.Delete(path, true);
+            }
+            else if (deleteAllFilesInDirectory == "2")
+            {
+                Directory.Delete(path);
+            }
 
             mainMenu.deleteOtherDitectory();
         }
@@ -133,6 +157,18 @@ namespace manipulacaoDeArquivos
             File.Delete(path);
 
             mainMenu.deleteOtherFile();
+        }
+
+        public void ReadJsonFile()
+        {
+            string jsonPath = Console.ReadLine();
+            string readJson = File.ReadAllText(jsonPath);
+
+            Console.WriteLine("");
+            Console.WriteLine(JsonConvert.DeserializeObject(readJson));
+            Console.WriteLine("");
+
+            mainMenu.readOtherJsonFile();
         }
     }
 }
