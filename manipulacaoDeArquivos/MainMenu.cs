@@ -35,6 +35,15 @@ Digite a opção desejada:
             MainMenu mainMenu = new MainMenu();
             
             mainMenu.Menu();
+
+            // Test Sonar
+            string test = "";
+
+            if (test == "") {
+
+            } else if (test == "") {
+                
+            }
         }
 
         public void ExitApplication()
