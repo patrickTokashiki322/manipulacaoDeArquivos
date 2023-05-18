@@ -1,11 +1,15 @@
 ﻿using manipulacaoDeArquivos;
 
-internal class Program
+namespace Program
 {
-    private static void Main(string[] args)
+    internal class Program
     {
-        MainMenu mainMenu = new MainMenu();
+        private static void Main(string[] args)
+        {
+            MainMenu mainMenu = new MainMenu();
 
-        mainMenu.Menu();
+            mainMenu.Menu();
+        }
+
     }
 }

@@ -1,0 +1,4 @@
+﻿D:\Área de Trabalho\FileManagerPatrick\manipulacaoDeArquivos\manipulacaoDeArquivos\FileManager.cs
+D:\Área de Trabalho\FileManagerPatrick\manipulacaoDeArquivos\manipulacaoDeArquivos\MainMenu.cs
+D:\Área de Trabalho\FileManagerPatrick\manipulacaoDeArquivos\manipulacaoDeArquivos\Program.cs
+D:\Área de Trabalho\FileManagerPatrick\manipulacaoDeArquivos\manipulacaoDeArquivos\obj\Debug\net7.0\apphost.exe

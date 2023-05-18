@@ -35,15 +35,6 @@ Digite a opção desejada:
             MainMenu mainMenu = new MainMenu();
             
             mainMenu.Menu();
-
-            // Test Sonar
-            string test = "";
-
-            if (test == "") {
-                Console.WriteLine("Redundancia");
-            } else if (test == "") {
-                Console.WriteLine("Redundancia");
-            }
         }
 
         public void ExitApplication()
