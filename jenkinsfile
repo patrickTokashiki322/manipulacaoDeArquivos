@@ -1,0 +1,9 @@
+node {
+  stage('SCM') {
+    checkout scm
+  }
+  stage('SonarQube Analysis') {
+      bat 'sonarScanner\\bin\\sonar-scanner.bat -D"sonar.projectKey=FileManagerPatrick" -D"sonar.sources=." -D"sonar.host.url=http://localhost:9000" -D"sonar.token=sqp_216d8302f189be4c65d279fea57293344d7c7f6c"'
+  }
+}
+
