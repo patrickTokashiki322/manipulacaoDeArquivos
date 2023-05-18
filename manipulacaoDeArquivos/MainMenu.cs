@@ -40,9 +40,9 @@ Digite a opção desejada:
             string test = "";
 
             if (test == "") {
-
+                Console.WriteLine("Redundancia");
             } else if (test == "") {
-                
+                Console.WriteLine("Redundancia");
             }
         }
 
